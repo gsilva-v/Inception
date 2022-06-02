@@ -1,0 +1,6 @@
+o arquivo www.conf do php foi copiado do proprio php, ./etc/php/7.3/fpm/pool.d/www.conf , exportado 
+para fora para trocarmos a porta que ele esta ouvindo o nginx
+por padrao vem :
+	36	listen = /run/php/php7.3-fpm.sock
+e foi trocado por:
+	36	listen = 9000

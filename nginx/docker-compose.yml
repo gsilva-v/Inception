@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  # Web server
+  nginx:
+    image: nginx:1.21
+    build: ./nginx/
+    container_name: nginx
+    ports: 
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
+      #   # primeiro é o volume que sera montato
+      #   # segundo é onde sera montado
+      #   # terceiro sao as permissoes
+      - ./nginx:/etc/nginx
+      - ./cert:/cert
