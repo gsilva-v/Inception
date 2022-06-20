@@ -8,3 +8,6 @@ e foi trocado por:
 
 o arquivo 50-server.conf do maria db foi retirado de ./etc/mysql/mariadb.conf.d/50-server.cnf, 
 para configurar a exposição da porta 3306
+
+
+usermod -d /var/lib/mysql/ mysql

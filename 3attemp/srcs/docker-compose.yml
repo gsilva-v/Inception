@@ -73,10 +73,10 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: ${PWD}/data/wordpress/
+      device: /home/gabriel/Projetos/Inception/3attemp/srcs/data/wordpress/
   db:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: ${PWD}/data/db/
+      device: /home/gabriel/Projetos/Inception/3attemp/srcs/data/db/

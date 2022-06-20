@@ -1,7 +1,8 @@
 FROM debian:buster
 
-RUN apt-get update
+RUN apt-get update && apt -y upgrade
 RUN apt-get install -y mariadb-server
+RUN apt-get update && apt -y upgrade
 
 COPY	./conf/ /tmp/conf/
 RUN		rm /etc/mysql/mariadb.conf.d/50-server.cnf
