@@ -4,3 +4,7 @@ por padrao vem :
 	36	listen = /run/php/php7.3-fpm.sock
 e foi trocado por:
 	36	listen = 9000
+
+
+o arquivo 50-server.conf do maria db foi retirado de ./etc/mysql/mariadb.conf.d/50-server.cnf, 
+para configurar a exposição da porta 3306

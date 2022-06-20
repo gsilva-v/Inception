@@ -1,0 +1,34 @@
+version: '3.7'
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql/
+    restart: always
+    networks:
+      - back_net
+    environment:
+        DB_ROOT: "${DB_ROOT}"
+        DB_PASS_ROOT: "${DB_PASS_ROOT}"
+        DB_USER: "${DB_USER}"
+        DB_PASS_USER: "${DB_PASS_USER}"
+
+networks:
+  back_net:
+   driver: bridge
+
+
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/data/db/
