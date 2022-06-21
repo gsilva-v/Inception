@@ -27,8 +27,6 @@ RUN		apt-get install -y wget
 
 RUN		mkdir -p /var/www/html/wordpress
 
-# RUN		chown -R www-data:www-data /var/www/html/wordpress
-
 RUN  	bash /tmp/tools/setup.sh
 RUN 	cp /tmp/conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 RUN 	cp /tmp/conf/wp-config.php /var/www/html/wordpress/wp-config.php

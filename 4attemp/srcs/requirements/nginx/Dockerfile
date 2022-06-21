@@ -36,4 +36,4 @@ RUN     mv server.csr server.key /etc/ssl/private
 EXPOSE 443
 
 # inicializa o nginx
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

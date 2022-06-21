@@ -28,38 +28,25 @@
 
 set -x
 
-
-
-DB_PATH=/var/lib/mysql/${DB_NAME} 
+#  chown -R mysql:mysql /var/lib/mysql
+DB_PATH=/var/lib/mysql/WORDPRESS 
 # if [ ! -d "$DB_PATH" ] 
 # then
 	# /etc/init.d/mysql start
-	service mysql start
-	# sleep 5
-	# mysql -uroot -pSenha321 -h localhost
-	# This sql file will setup 2 database users (root and db_user)
-	mysql -uroot -pSenha321 -e "grant all on *.* to 'root'@'localhost' with grant option;";
-	mysql -uroot -pSenha321 -e "create user 'root'@'%';";
-	mysql -uroot -pSenha321 -e "grant all on *.* to 'root'@'%' with grant option;";
-	mysql -uroot -pSenha321 -e "SET PASSWORD FOR 'root'@'localhost'=PASSWORD('Senha321');";
-	mysql -uroot -pSenha321 -e "SET PASSWORD FOR 'root'@'%'=PASSWORD('Senha321');";
-	mysql -uroot -pSenha321 -e "FLUSH PRIVILEGES;";
-
-	# mysql -uroot -pSenha321 -e "CREATE USER 'gsilva'@'localhost' IDENTIFIED BY '123';";
-	# mysql -uroot -pSenha321 -e "CREATE USER 'gsilva'@'%' IDENTIFIED BY '123';";
-	# mysql -uroot -pSenha321 -e "GRANT ALL PRIVILEGES ON *.* TO 'gsilva'@'localhost';";
-	# mysql -uroot -pSenha321 -e "GRANT ALL PRIVILEGES ON *.* TO 'gsilva'@'%';";
-	# mysql -uroot -pSenha321 -e "FLUSH PRIVILEGES;";
-
-	mysql -uroot -pSenha321 -e "CREATE DATABASE IF NOT EXISTS WORDPRESS;";
-
-	# service mysql stop
-	# This sql file will setup 2 users for wp (wp_root and pcunha)
-	
-	# This file will allow access to the database from outside the container
-	# service mysql start && mysql -u$DB_ROOT -p$DB_PASS_ROOT -D$DB_NAME < /conf/wordpress.sql
-
-	mysqladmin -uroot -pSenha321 shutdown
+	service mysql start;
+	# -- Create database
+	mysql -e "CREATE DATABASE IF NOT EXISTS WORDPRESS;"
+	# -- Create database admin user and set admin priveleges
+	mysql -e "CREATE USER 'owner'@'localhost';"
+	mysql -e "SET PASSWORD FOR 'owner'@'localhost' = PASSWORD('pass');"
+	mysql -e "GRANT ALL PRIVILEGES ON WORDPRESS.* TO 'owner'@'localhost' IDENTIFIED BY 'pass';"
+	mysql -e "GRANT ALL ON WORDPRESS.* to 'owner'@'%' IDENTIFIED BY 'pass';"
+	mysql -e "FLUSH PRIVILEGES;"
+	# -- Create database lambda user and set read privileges
+	mysql -e "CREATE USER 'gsilva'@'localhost' IDENTIFIED BY '123';"
+	mysql -e "GRANT SELECT ON *.* TO 'gsilva'@'localhost';"
+	mysql -e "FLUSH PRIVILEGES;"
+	service mysql stop
 	
 # fi
 
