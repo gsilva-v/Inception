@@ -12,7 +12,7 @@ RUN 	chmod 777 /tmp/conf/setup.sh
 
 EXPOSE 3306
 
-ENTRYPOINT [ "/tmp/conf/setup.sh" ]
+RUN /tmp/conf/setup.sh
 
 CMD ["mysqld"]
 
