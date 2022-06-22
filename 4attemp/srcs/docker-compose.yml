@@ -33,7 +33,7 @@ services:
         - DOMAIN_NAME=${DOMAIN_NAME}
         - WP_TITLE=${WP_TITLE}
         - WP_ADMIN=${WP_ADMIN}
-        - WP_ADMIN_PASSEWORD=${WP_ADMIN_PASSEWORD}
+        - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
         - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
         - WP_USER=${WP_USER}
         - WP_PASSWORD=${WP_PASSWORD}
