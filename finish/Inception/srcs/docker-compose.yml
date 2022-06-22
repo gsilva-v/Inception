@@ -1,0 +1,76 @@
+version: '3.7'
+
+services:
+  mariadb:
+    image: mariadb:1.0
+    build : ./requirements/mariadb
+    container_name: mariadb
+    restart: always
+    volumes:
+      - db:/var/lib/mysql/
+    networks:
+      - back_net
+    environment:
+        DB_ROOT: "${DB_ROOT}"
+        DB_PASS_ROOT: "${DB_PASS_ROOT}"
+        DB_USER: "${DB_USER}"
+        DB_PASS_USER: "${DB_PASS_USER}"
+        DB_NAME: "${DB_NAME}"
+    ports:
+      - "3306:3306"
+
+  wordpress:
+    depends_on:
+      - mariadb
+    image: wordpress:1.0
+    container_name: wordpress
+    build: 
+      context: ./requirements/wordpress/
+      args:
+          DB_NAME: ${DB_NAME}
+          DB_USER: ${DB_USER}
+          DB_PASS_USER: ${DB_PASS_USER}
+          DB_HOST: ${DB_HOST}
+    ports:
+      - "9000:9000"
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - back_net
+    volumes:
+      - wp:/var/www/html/
+
+  nginx:
+    depends_on:
+      - wordpress   
+    image: nginx:1.0
+    container_name: nginx
+    build: ./requirements/nginx/
+    ports:
+    - "443:443"
+    networks:
+      - back_net
+    restart: always
+    env_file:
+      - .env
+    volumes:
+       - wp:/var/www/html/
+
+networks:
+  back_net:
+   driver: bridge
+
+volumes:
+  wp:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/gabriel/data/wordpress/
+  db:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/gabriel/data/db/
