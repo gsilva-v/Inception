@@ -10,9 +10,3 @@ chmod +x /usr/local/bin/wp
 # Install Wordpress using WP-CLI'''
 cd wordpress
 wp core download --allow-root
-wp core install \
---url=https://gsilva.42.fr \
---title=42 --admin_user=gsilva \
---admin_email=gsilva@student.42.fr \
---admin_password=123 \
---allow-root

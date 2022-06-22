@@ -25,7 +25,7 @@ then
 
 
 	# This file will allow access to the database from outside the container
-	# mysql -u$DB_ROOT -p$DB_PASS_ROOT -D$DB_NAME < /tmp/conf/dump01.sql
+	mysql -u$DB_ROOT -p$DB_PASS_ROOT -D$DB_NAME < /tmp/conf/wordpress.sql
 	service mysql stop
 	mysqladmin -u${DB_ROOT} -p${DB_PASS_ROOT} shutdown
 fi
