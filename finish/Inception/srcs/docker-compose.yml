@@ -67,10 +67,10 @@ volumes:
     driver_opts:
       o: bind
       type: none
-      device: /home/gabriel/data/wordpress/
+      device: ${VOL_PATH}/wordpress/
   db:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /home/gabriel/data/db/
+      device: ${VOL_PATH}/db/
