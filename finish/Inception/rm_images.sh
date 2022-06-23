@@ -3,3 +3,5 @@
 set -x
 
 sudo docker rmi -f $(docker images -q --no-trunc)
+
+exit 0

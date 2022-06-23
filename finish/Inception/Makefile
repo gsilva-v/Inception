@@ -1,10 +1,10 @@
-Vol_Path = ${HOME}/data/
+Vol_Path = /home/gsilva-v/data/
 Vol_DB = ${Vol_Path}db/
 Vol_WP = ${Vol_Path}wordpress/
 Domain = gsilva-v.42.fr
 LocalHost = 127.0.0.1
 
-up: conf
+up: down conf
 	@sudo docker-compose -f  ./srcs/docker-compose.yml --env-file ./srcs/.env up -d --build
 
 down:
@@ -17,6 +17,7 @@ conf:
 
 clean: down
 	@sudo bash rm_images.sh
+	sudo docker volume rm srcs_wp srcs_db
 
 fclean: clean
 	@sudo rm -rf ${Vol_DB} ${Vol_WP}
